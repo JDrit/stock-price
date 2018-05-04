@@ -2,6 +2,8 @@ package net.batchik.jd;
 
 import com.google.cloud.firestore.*;
 import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -9,11 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StockUpdater implements Runnable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockUpdater.class);
+
     private static final int BATCH_SIZE = 30;
     private static final String STOCK_COLLECTION = "stocks";
 
     private final Firestore db;
     private final StockPriceFetcher stockPriceFetcher;
+    private int count;
 
     public StockUpdater(@Nonnull final Firestore db, @Nonnull final StockPriceFetcher stockPriceFetcher) {
         this.db = db;
@@ -23,6 +28,7 @@ public class StockUpdater implements Runnable {
     @Override
     public void run() {
         try {
+            LOGGER.info("Starting update #{}", ++count);
             final QuerySnapshot snapshot = db.collection(STOCK_COLLECTION).get().get();
             final List<List<QueryDocumentSnapshot>> documents = Lists.partition(snapshot.getDocuments(), BATCH_SIZE);
 
