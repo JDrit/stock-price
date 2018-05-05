@@ -50,8 +50,7 @@ public class StockUpdater implements Runnable {
             }
 
         } catch (final Exception ex) {
-            System.err.println("failed to query stocks");
-            ex.printStackTrace();
+            LOGGER.warn("failed to query stocks", ex);
         }
 
     }

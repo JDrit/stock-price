@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Stock Prices</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">This is a test site for showing live updates from a Google Firestore database, hope it works!</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+		<li><a href="https://jd.batchik.net">Personal Site</a></li>
+                <li><a href="https://github.com/JDrit/stock-price" class="text-white">Source Code</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+	    <img style="max-width: 50px; margin-right: 10px;" class="img-fluid" src="img/stock.png">
+            <strong>Stock Prices</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Let's explore stock prices together!!</h1>
+          <p class="lead text-muted">
+	    Losing money betting on the randomizied behavior of the stock market is a fun past time and a great way to lose money. Let's try and see just how much money we can lose today!
+	  </p>
+          <p>
+            <a href="#" class="btn btn-primary my-2">Main call to action</a>
+            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="py-5 bg-light">
+        <div class="container">
+          <div class="row" id="stock-row">
+	  </div>
+	</div>
+      </div>
+
+    </main>
+
+    <!-- bootstrap setup -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
+
+    <!-- firebase setup -->
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+    <script src="js/firebase.js"></script>      
+
+  </body>
+</html>

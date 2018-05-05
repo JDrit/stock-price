@@ -9,5 +9,8 @@
 build/
 out/
 
+# emacs
+.#*
+
 # other
 *~

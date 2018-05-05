@@ -41,7 +41,7 @@ public class Main {
         final StockPriceFetcher stockPriceFetcher = new AlphaVantageFetcher(apiKey);
 
         final Runnable updater = new StockUpdater(db, stockPriceFetcher);
-        final Future<?> future = executorService.scheduleAtFixedRate(updater, 0, 30, TimeUnit.SECONDS);
+        final Future<?> future = executorService.scheduleAtFixedRate(updater, 0, 10, TimeUnit.SECONDS);
 
         LOGGER.info("Stock updater thread scheduled");
 

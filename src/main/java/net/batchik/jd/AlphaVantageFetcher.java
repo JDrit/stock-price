@@ -15,6 +15,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -22,11 +24,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class AlphaVantageFetcher implements StockPriceFetcher {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AlphaVantageFetcher.class);
     private static final ConnectionReuseStrategy REUSE_STRATEGY = DefaultConnectionReuseStrategy.INSTANCE;
     private static final ConnectionBackoffStrategy BACKOFF_STRATEGY = new DefaultBackoffStrategy();
     private static final ConnectionKeepAliveStrategy KEEP_ALIVE_STRATEGY = new LongKeepAliveStrategy(40, TimeUnit.SECONDS);
@@ -78,11 +80,9 @@ public class AlphaVantageFetcher implements StockPriceFetcher {
                             DATE_FORMAT.parse(stock.getString("4. timestamp")));
                     prices.add(price);
                 } catch (final ParseException ex) {
-                    System.err.println("failed to parse date");
-                    ex.printStackTrace();
+                    LOGGER.warn("failed to parse date", ex);
                 } catch (final JSONException ex) {
-                    System.err.println("failed to parse json");
-                    ex.printStackTrace();
+                    LOGGER.warn("failed to parse json", ex);
                 }
             }
 
