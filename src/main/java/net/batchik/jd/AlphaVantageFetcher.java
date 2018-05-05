@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -69,20 +70,28 @@ public class AlphaVantageFetcher implements StockPriceFetcher {
             final JSONArray array = result.getJSONArray("Stock Quotes");
             final int size = array.length();
             final List<StockPrice> prices = new ArrayList<>(size);
-
             for (int i = 0 ; i < size ; i++) {
+                JSONObject stock = null;
+
                 try {
-                    final JSONObject stock = array.getJSONObject(i);
-                    final StockPrice price = new StockPrice(
-                            stock.getString("1. symbol"),
-                            stock.getDouble("2. price"),
-                            stock.getLong("3. volume"),
-                            DATE_FORMAT.parse(stock.getString("4. timestamp")));
-                    prices.add(price);
+                    stock = array.getJSONObject(i);
+
+                    final String symbol = stock.getString("1. symbol");
+                    final double price = stock.getDouble("2. price");
+
+                    final String volumeStr = stock.getString("3. volume");
+                    final long volume;
+                    if (volumeStr.equals("--")) {
+                        volume = 0;
+                    } else {
+                        volume = stock.getLong("3. volume");
+                    }
+                    final Date date = DATE_FORMAT.parse(stock.getString("4. timestamp"));
+                    prices.add(new StockPrice(symbol, price, volume, date));
                 } catch (final ParseException ex) {
                     LOGGER.warn("failed to parse date", ex);
                 } catch (final JSONException ex) {
-                    LOGGER.warn("failed to parse json", ex);
+                    LOGGER.warn("Failed to parse json: {}", stock);
                 }
             }
 
